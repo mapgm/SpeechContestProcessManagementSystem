@@ -233,16 +233,25 @@ void SpeechManager::showScore()
 	if (this->index == 1)
 	{
 		v = v2;
+		multimap<double, int, greater<double>> mmp;
+		for (vector<int>::iterator it = v.begin(); it != v.end(); it++)
+		{
+			mmp.insert({ iToSpeaker[*it].score[this->index - 1], *it });
+		}
+		for (multimap<double, int>::iterator it = mmp.begin(); it != mmp.end(); it++)
+		{
+			cout << "选手编号：" << it->second << " 姓名： " << iToSpeaker[it->second].name << " 得分： " << iToSpeaker[it->second].score[this->index - 1] << endl;
+		}
 	}
 	else
 	{
 		v = v3;
+		for (vector<int>::iterator it = v.begin(); it != v.end(); it++)
+		{
+			cout << "选手编号：" << *it << " 姓名： " << iToSpeaker[*it].name << " 得分： " << iToSpeaker[*it].score[this->index - 1] << endl;
+		}
 	}
 
-	for (vector<int>::iterator it = v.begin(); it != v.end(); it++)
-	{
-		cout << "选手编号：" << *it << " 姓名： " << iToSpeaker[*it].name << " 得分： " << iToSpeaker[*it].score[this->index - 1] << endl;
-	}
 	cout << endl;
 
 	system("pause");
